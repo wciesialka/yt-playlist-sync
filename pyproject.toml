@@ -32,7 +32,7 @@ Repository = "https://github.com/wciesialka/yt-playlist-sync"
 Issues = "https://github.com/wciesialka/yt-playlist-sync/issues"
 
 [project.scripts]
-yt-p-sync = "ytpsync:__main__.main"
+yt-p-sync = "ytpsync:main"
 
 [tool.setuptools.dynamic]
 version = {attr = "ytpsync.__version__"}
