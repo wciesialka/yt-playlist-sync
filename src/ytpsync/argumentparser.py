@@ -1,4 +1,5 @@
 import os
+import logging
 from shutil import which
 from argparse import ArgumentParser, Namespace
 from typing import Tuple
@@ -58,30 +59,29 @@ def executable_type(executable_path: Path) -> Path:
         raise ValueError(f"Path {executable_path} is not executable.")
     return executable_path.resolve()
 
-def parse_args() -> Namespace:
+def parse_args() -> (Namespace, Namespace):
     '''Create an argument parser and parse args.
 
-    :return: The parsed arguments.
+    :return: The parsed arguments, and unparsed arguments.
     :rtype: Namespace
     '''
     # Create argument parser
     argparser: ArgumentParser = ArgumentParser(
                                     prog="yt-p-sync",
-                                    description="Sync a YouTube playlist."
+                                    description="Sync a YouTube playlist.",
+                                    epilog="Any additional options will be "
+                                           "passed directly to your yt-dlp"
+                                           "executable."
                                 )
-    supported_formats: Tuple[str] = (
-        "3gp", "aac", "flv", "m4a", "mp3", "mp4", "ogg", "wav", "webm",
-        "best", "bestvideo", "bestaudio", "worst", "worstvideo", "worstaudio"
-    )
-    argparser.add_argument("-f", "--format", choices=supported_formats, default="best",
-                           help="Select format to download playlist contents in.", type=str)
     default_executable: str = which("yt-dlp")
-    argparser.add_argument("-x", "--ytdlp", type=executable_type, required=False,
+    argparser.add_argument("--executable", type=executable_type, required=False,
                            help="Path to yt-dlp executable.", default=default_executable)
+    argparser.add_argument("--logging", help="Logging level", default=logging.INFO,
+                           choices=(logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL))
     argparser.add_argument("playlist", type=url_type, help="URL of playlist to sync.")
     argparser.add_argument("directory", type=directory_type, help="Directory to sync playlist to.")
 
     # Parse arguments and return results
-    args = argparser.parse_args()
+    args, unknown_args = argparser.parse_known_args()
 
-    return args
+    return (args, unknown_args)
