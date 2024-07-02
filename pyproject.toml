@@ -28,6 +28,7 @@ classifiers = [
 dynamic = ["version", "dependencies"]
 
 [project.urls]
+Homepage = "https://pypi.org/project/yt-playlist-sync/"
 Repository = "https://github.com/wciesialka/yt-playlist-sync"
 Issues = "https://github.com/wciesialka/yt-playlist-sync/issues"
 

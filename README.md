@@ -14,7 +14,9 @@ Sync a YouTube playlist to a directory on your system using [yt-dlp](https://git
 
 ### Installation
 
-Copy the directory to your machine, and run `pip install -U .` in the newly created directory.
+This project is available on [PyPI](https://pypi.org/project/yt-playlist-sync/).
+You can install it using `pip install --user yt-playlist-sync`. Additionally, you can
+install the project by cloning it to your machine and running `pip install --user .`. 
 
 ## Usage
 
