@@ -62,6 +62,7 @@ def download_playlist(playlist: str, output_directory: Path, executable: Path,
     logging.debug("Subprocess arguments: %s", executable_args)
 
     # Run the process and capture all filepaths
+    logging.info("Beginning sync...")
     filepaths: list = None
     with subprocess.Popen(executable_args,
                           stdout=subprocess.PIPE,
