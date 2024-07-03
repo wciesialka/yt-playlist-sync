@@ -77,7 +77,8 @@ def parse_args() -> (Namespace, Namespace):
     argparser.add_argument("--executable", type=executable_type, required=False,
                            help="Path to yt-dlp executable.", default=default_executable)
     argparser.add_argument("--logging", help="Logging level. Default 20 (INFO).", default=logging.INFO,
-                           choices=(logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL))
+                           choices=(logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL),
+                           type=int)
     argparser.add_argument("playlist", type=url_type, help="URL of playlist to sync.")
     argparser.add_argument("directory", type=directory_type, help="Directory to sync playlist to.")
 
